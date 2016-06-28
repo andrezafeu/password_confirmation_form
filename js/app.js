@@ -1,17 +1,24 @@
+var $password = $("#password")
+var $confirmPassword = $("#confirm_password")
+
 $("form span").hide();
 
-$("#password").focus(function(){
-	if ($(this).val().length > 8) {
-		$(this).next().hide();
+function passwordEvent() {
+	if ($password.val().length > 8) {
+		$password.next().hide();
 	} else {
-		$(this).next().show();
+		$password.next().show();
 	} 
-});
+}
 
-$("#confirm_password").focus(function(){
-	if ($(this).val() == $("#password").val()) {
-		$(this).next().hide();
+function confirmPasswordEvent() {
+	if ($confirmPassword.val() === $("#password").val()) {
+		$confirmPassword.next().hide();
 	} else {
-		$(this).next().show();
+		$confirmPassword.next().show();
 	} 
-});
+}
+
+$password.focus(passwordEvent);
+
+$confirmPassword.focus(confirmPasswordEvent);
