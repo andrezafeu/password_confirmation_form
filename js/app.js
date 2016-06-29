@@ -1,7 +1,13 @@
 var $password = $("#password");
 var $confirmPassword = $("#confirm_password");
+var $username = $("#username");
 
 $("form span").hide();
+
+
+function isUsernamePresent() {
+	return $username.val().length > 2;
+}
 
 
 function isPasswordValid() {
@@ -15,7 +21,16 @@ function arePasswordsMatching() {
 
 
 function canSubmit() {
-	return isPasswordValid() && arePasswordsMatching();
+	return isPasswordValid() && arePasswordsMatching() && isUsernamePresent();
+}
+
+
+function usernameEvent() {
+	if (isUsernamePresent()) {
+		$username.next().hide();
+	} else {
+		$username.next().show();
+	}
 }
 
 
@@ -47,6 +62,8 @@ function enableSubmitEvent() {
 $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
 
 $confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+$username.focus(usernameEvent).keyup(usernameEvent).keyup(enableSubmitEvent);
 
 // It needs to be executed when the page loads
 enableSubmitEvent();
